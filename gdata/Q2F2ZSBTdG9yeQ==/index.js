@@ -93,7 +93,7 @@ h.Wf++;
                 (new r(w[D].start,w[D].end,w[D].audio || 0)).open("GET", w[D].filename);
             p.addRunDependency("datafile_index.data");
             p.tg || (p.tg = {});
-            p.tg["https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.data"] = {
+            p.tg["https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.data"] = {
                 nh: !1
             };
             n ? (t(n),
@@ -102,7 +102,7 @@ h.Wf++;
         "object" === typeof window ? window.encodeURIComponent(window.location.pathname.toString().substring(0, window.location.pathname.toString().lastIndexOf("/")) + "/") : "undefined" === typeof process && "undefined" !== typeof location && encodeURIComponent(location.pathname.toString().substring(0, location.pathname.toString().lastIndexOf("/")) + "/");
         "function" !== typeof h.locateFilePackage || h.locateFile || (h.locateFile = h.locateFilePackage,
         k("warning: you defined Module.locateFilePackage, that has been renamed to Module.locateFile (using your locateFilePackage for now)"));
-        var f = h.locateFile ? h.locateFile("https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.data", "") : "https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.data"
+        var f = h.locateFile ? h.locateFile("https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.data", "") : "https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.data"
           , g = b.remote_package_size
           , l = null
           , n = h.getPreloadedPackage ? h.getPreloadedPackage(f, g) : null;
@@ -7270,7 +7270,7 @@ var Ef = {
             return k(`Module.instantiateWasm callback failed with error: ${c}`),
             !1
         }
-    Ba ||= Aa("https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm") ? "https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm" : h.locateFile ? h.locateFile("https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm", fa) : "https://tdataserver.vercel.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm";
+    Ba ||= Aa("https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm") ? "https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm" : h.locateFile ? h.locateFile("https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm", fa) : "https://tdataserver.netlify.app/gdata/Q2F2ZSBTdG9yeQ==/index.wasm";
     Fa(b, function(c) {
         a(c.instance)
     });
