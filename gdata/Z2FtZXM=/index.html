@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #1e1e2f, #282c34);
+      overflow: hidden;
+      color: #ffffff;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      animation: starsMove 20s linear infinite;
+      opacity: 0.3;
+      z-index: -2;
+    }
+    @keyframes starsMove {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: -1000px -1000px;
+      }
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(32, 35, 42, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      z-index: 1;
+    }
+    #searchBar {
+      width: 90%;
+      max-width: 600px;
+      padding: 15px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    #searchBar:focus {
+      border-color: #61dafb;
+      box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
+    }
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #61dafb;
+      text-shadow: 0 0 8px rgba(97, 218, 251, 0.7);
+    }
+    .games-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .game-card {
+      background: #20232a;
+      border-radius: 10px;
+      padding: 10px;
+      width: 150px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .game-card:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    }
+    .game-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #61dafb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .game-card img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
+    }
+    .game-card h3 {
+      font-size: 1.1em;
+      color: #ffffff;
+      margin: 5px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    #iframe-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    #iframe-container iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 12px;
+    }
+    #back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #61dafb;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    #back-btn:hover {
+      background: #4fa3f7;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Lessons</h1>
+    <input type="text" id="searchBar" placeholder="Search games..." onkeyup="searchTitles()">
+    <div class="games-grid">
+      <a class="game-card" onclick="openIframe('Slope.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Slope.png" title="Slope">
+        <h3>Slope</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('mc.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/MC.webp" title="1v1 LOL">
+        <h3>1v1 LOL</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('g1.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Granny.png" title="Granny">
+        <h3>Granny</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('g2.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Granny2.png" title="Granny 2">
+        <h3>Granny 2</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('ONAB.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/ONAB.png" title="Obby on a Bike">
+        <h3>Obby on a Bike</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('RetroBowl.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/RB.png" title="Retro Bowl">
+        <h3>Retro Bowl</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('sm64.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/SM64.png" title="Super Mario 64">
+        <h3>Super Mario 64</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('Tetris.html')">
+        <img src="https://logosandtypes.com/wp-content/uploads/2024/08/Tetris.png" title="Tetris">
+        <h3>Tetris</h3>
+      </a>
+    </div>
+  </div>
+
+  <div id="iframe-container">
+    <button id="back-btn" onclick="closeIframe()">Back</button>
+    <iframe id="game-iframe"></iframe>
+  </div>
+
+  <script>
+    function openIframe(url) {
+      document.getElementById('game-iframe').src = url;
+      document.getElementById('iframe-container').style.display = 'flex';
+    }
+
+    function closeIframe() {
+      document.getElementById('game-iframe').src = '';
+      document.getElementById('iframe-container').style.display = 'none';
+    }
+
+    function searchTitles() {
+      const searchBar = document.getElementById('searchBar').value.toLowerCase();
+      const gameCards = document.querySelectorAll('.game-card');
+
+      gameCards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        if (title.includes(searchBar)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
