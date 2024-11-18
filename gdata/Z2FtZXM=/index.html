@@ -189,6 +189,10 @@
   </div>
 
   <script>
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+    
     function openIframe(url) {
       document.getElementById('game-iframe').src = url;
       document.getElementById('iframe-container').style.display = 'flex';
