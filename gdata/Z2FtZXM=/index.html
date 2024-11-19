@@ -13,8 +13,11 @@
       min-height: 100vh;
       margin: 0;
       background: linear-gradient(135deg, #1e1e2f, #282c34);
-      overflow: hidden;
+      overflow: auto;
       color: #ffffff;
+    }
+    body::-webkit-scrollbar {
+      display: none; 
     }
     body::before {
       content: '';
@@ -148,6 +151,10 @@
     <h1>Lessons</h1>
     <input type="text" id="searchBar" placeholder="Search games..." onkeyup="searchTitles()">
     <div class="games-grid">
+      <a class="game-card" onclick="openIframe('../VFMz/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/TS3.jpg" title="Time Shooter 3">
+        <h3>Time Shooter 3</h3>
+      </a>
       <a class="game-card" onclick="openIframe('Slope.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Slope.png" title="Slope">
         <h3>Slope</h3>
@@ -159,10 +166,6 @@
       <a class="game-card" onclick="openIframe('g1.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Granny.png" title="Granny">
         <h3>Granny</h3>
-      </a>
-      <a class="game-card" onclick="openIframe('g2.html')">
-        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/Granny2.png" title="Granny 2">
-        <h3>Granny 2</h3>
       </a>
       <a class="game-card" onclick="openIframe('ONAB.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/ONAB.png" title="Obby on a Bike">
@@ -179,6 +182,38 @@
       <a class="game-card" onclick="openIframe('Tetris.html')">
         <img src="https://logosandtypes.com/wp-content/uploads/2024/08/Tetris.png" title="Tetris">
         <h3>Tetris</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../Qi1SYW5kb20=/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/B-Random.png" title="Basket Random">
+        <h3>Basket Random</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../SS1C/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/I-B.png" title="Idle Breakout">
+        <h3>Idle Breakout</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../Qi1TdGFycw==/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/B-Stars.png" title="Basketball Stars">
+        <h3>Basketball Stars</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../Q0NsaWNrZXI=/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/CClicker.png" title="Cookie Clicker">
+        <h3>Cookie Clicker</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../U1N1cmZlcnM=/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/SSurfers.png" title="Subway Surfers">
+        <h3>Subway Surfers</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../R1NP/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/GSO.png" title="Getaway Shootout">
+        <h3>Getaway Shootout</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../UlRT/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/RTS.png" title="Rooftop Snipers">
+        <h3>Rooftop Snipers</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('../REc=/index.html')">
+        <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/DG.png" title="Dino Game">
+        <h3>Dino Game</h3>
       </a>
     </div>
   </div>
