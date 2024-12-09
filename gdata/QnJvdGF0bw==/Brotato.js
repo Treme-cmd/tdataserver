@@ -730,7 +730,7 @@ const Engine = (function () {
 				this.config.update(override);
 				// Add main-pack argument.
 				const exe = this.config.executable;
-				const pack = this.config.mainPack || `https://pixeldrain.com/api/file/wCcYws5Y?download`;
+				const pack = this.config.mainPack || `https://store8.gofile.io/download/web/46b7532a-eef2-47a3-931d-f56ae5521c8d/Brotato.pck`;
 				this.config.args = ['--main-pack', pack].concat(this.config.args);
 				// Start and init with execName as loadPath if not inited.
 				const me = this;
