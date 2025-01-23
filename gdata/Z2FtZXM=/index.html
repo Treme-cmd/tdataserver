@@ -149,7 +149,7 @@
 <body>
   <div class="container">
     <h1>Lessons</h1>
-    <input type="text" id="searchBar" placeholder="Search games..." onkeyup="searchTitles()">
+    <input type="text" id="searchBar" placeholder="Search games..." onkeyup="searchTitles()" autocomplete="off">
     <div class="games-grid">
       <a class="game-card" onclick="openIframe('../VFMz/index.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/TS3.jpg" title="Time Shooter 3">
@@ -178,10 +178,14 @@
       <a class="game-card" onclick="openIframe('sm64.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/SM64.png" title="Super Mario 64">
         <h3>Super Mario 64</h3>
-      </a>
-      <a class="game-card" onclick="openIframe('Tetris.html')">
+      </a>      
+      <a class="game-card" onclick="openIframe('newtetris.html')">
         <img src="https://logosandtypes.com/wp-content/uploads/2024/08/Tetris.png" title="Tetris">
         <h3>Tetris</h3>
+      </a>
+      <a class="game-card" onclick="openIframe('Tetris.html')">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Tetris_Boxshot.jpg" title="Tetris (GB)">
+        <h3>Tetris (GB)</h3>
       </a>
       <a class="game-card" onclick="openIframe('../Qi1SYW5kb20=/index.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/B-Random.png" title="Basket Random">
@@ -219,6 +223,10 @@
         <img src="https://play-lh.googleusercontent.com/Nd86kP1molGyKwoD5ROMMGTkmTVKNvfosdW4VhjO52IIZaLHZSxF1Eygu5OOMvH-xyY" title="Brotato">
         <h3>Brotato</h3>
       </a>
+      <a class="game-card hidden" data-hidden="upupdowndown" onclick="openIframe('vgag.htm')">
+        <img src="aavaaanaaa.jpg" title="VN">
+        <h3>VN</h3>
+      </a>
     </div>
   </div>
 
@@ -245,16 +253,18 @@
     function searchTitles() {
       const searchBar = document.getElementById('searchBar').value.toLowerCase();
       const gameCards = document.querySelectorAll('.game-card');
-
       gameCards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        if (title.includes(searchBar)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
+      const title = card.querySelector('h3').innerText.toLowerCase();
+      const hiddenCondition = card.dataset.hidden; 
+      if (hiddenCondition && searchBar === hiddenCondition) {
+        card.classList.remove('hidden'); 
+      } else if (!hiddenCondition && title.includes(searchBar)) {
+        card.classList.remove('hidden'); 
+      } else {
+        card.classList.add('hidden'); 
+      }
+    });
+  }
   </script>
 </body>
 </html>
