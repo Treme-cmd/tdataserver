@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idle-Editor</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      align-items: flex-start;
+      padding: 20px;
+      background: linear-gradient(135deg, #282c34, #3a3f47);
+      color: #61dafb;
+      margin: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background: #20232a;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: #61dafb;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .description {
+      text-align: center;
+      font-size: 0.9em;
+      color: #bbbbbb;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #61dafb;
+      background: #282c34;
+      color: #ffffff;
+      resize: none;
+    }
+    button {
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .output-label {
+      margin-top: 15px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .output-container {
+      margin-top: 10px;
+      padding: 10px;
+      background: #1c1e24;
+      border-radius: 4px;
+      word-wrap: break-word;
+    }
+    #editor {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Idle-Editor</h1>
+    <p class="description">A Idle Breakout save editor. (Highly experimental)</p>
+
+    <label for="saveInput">Paste Save Data:</label>
+    <textarea id="saveInput" rows="4" placeholder="Paste your save data here..."></textarea>
+    <button id="decodeButton" onclick="decodeSave()" disabled>Decode Save Data</button>
+
+    <div id="editor">
+      <label>Level:</label>
+      <input type="number" id="level" />
+
+      <label>Money:</label>
+      <input type="number" id="money" />
+
+      <label>BB:</label>
+      <input type="number" id="BB" />
+
+      <label>Gold:</label>
+      <input type="number" id="gold" />
+
+      <label>Gold on Reset:</label>
+      <input type="number" id="goldOnReset" />
+
+      <label>Prestiges:</label>
+      <input type="number" id="prestiges" />
+
+      <label>Bricks:</label>
+      <input type="number" id="bricks" />
+
+      <label>Total Bricks Broken:</label>
+      <input type="number" id="totalBricksBroken" />
+
+      <label>Total Black Bricks Broken:</label>
+      <input type="number" id="totalBlackBricksBroken" />
+
+      <!-- Ball Types -->
+      <label>Basic Ball:</label>
+      <input type="number" id="basicBall" />
+
+      <label>Plasma Ball:</label>
+      <input type="number" id="plasmaBall" />
+
+      <label>Sniper Ball:</label>
+      <input type="number" id="sniperBall" />
+
+      <label>Scatter Ball:</label>
+      <input type="number" id="scatterBall" />
+
+      <label>Cannonball:</label>
+      <input type="number" id="cannonBall" />
+
+      <label>Poison Ball:</label>
+      <input type="number" id="poisonBall" />
+
+      <button onclick="encodeSave()">Save and Encode</button>
+    </div>
+
+    <div class="output-label">Encoded Save Data:</div>
+    <div class="output-container" id="encodedOutput"></div>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+  </div>
+
+  <script>
+    let originalData = [];
+
+    document.getElementById("saveInput").addEventListener("input", function () {
+      const saveData = this.value.trim();
+      const isValidBase64 = /^([A-Za-z0-9+/=]+)$/.test(saveData) && saveData.length % 4 === 0;
+      document.getElementById("decodeButton").disabled = !isValidBase64;
+    });
+
+    function decodeSave() {
+      const saveInput = document.getElementById("saveInput").value.trim();
+      try {
+        const decodedData = atob(saveInput);
+        originalData = decodedData.split(',');
+
+        document.getElementById("level").value = originalData[0];
+        document.getElementById("money").value = originalData[1];
+        document.getElementById("BB").value = originalData[104];
+        document.getElementById("gold").value = originalData[2];
+        document.getElementById("goldOnReset").value = originalData[3];
+        document.getElementById("prestiges").value = originalData[4];
+        document.getElementById("bricks").value = originalData[5];
+        document.getElementById("totalBricksBroken").value = originalData[6];
+        document.getElementById("totalBlackBricksBroken").value = originalData[7];
+
+        document.getElementById("basicBall").value = originalData[28];
+        document.getElementById("plasmaBall").value = originalData[29];
+        document.getElementById("sniperBall").value = originalData[30];
+        document.getElementById("scatterBall").value = originalData[31];
+        document.getElementById("cannonBall").value = originalData[32];
+        document.getElementById("poisonBall").value = originalData[33];
+
+        document.getElementById("editor").style.display = "block";
+      } catch (error) {
+        alert("Invalid save data! Please ensure it's properly formatted.");
+      }
+    }
+
+    function encodeSave() {
+      const values = [...originalData];
+
+      values[0] = document.getElementById("level").value;
+      values[1] = document.getElementById("money").value;
+      values[104] = document.getElementById("BB").value;
+      values[2] = document.getElementById("gold").value;
+      values[3] = document.getElementById("goldOnReset").value;
+      values[4] = document.getElementById("prestiges").value;
+      values[5] = document.getElementById("bricks").value;
+      values[6] = document.getElementById("totalBricksBroken").value;
+      values[7] = document.getElementById("totalBlackBricksBroken").value;
+
+      // Update ball counts for indices 32 through 37
+      values[28] = document.getElementById("basicBall").value;
+      values[29] = document.getElementById("plasmaBall").value;
+      values[30] = document.getElementById("sniperBall").value;
+      values[31] = document.getElementById("scatterBall").value;
+      values[32] = document.getElementById("cannonBall").value;
+      values[33] = document.getElementById("poisonBall").value;
+
+      const encodedData = btoa(values.join(","));
+      document.getElementById("encodedOutput").textContent = encodedData;
+    }
+
+    function copyToClipboard() {
+      const output = document.getElementById("encodedOutput").textContent;
+      navigator.clipboard.writeText(output).then(() => {
+        alert("Copied to clipboard!");
+      }).catch(err => {
+        alert("Failed to copy: " + err);
+      });
+    }
+  </script>
+</body>
+</html>
