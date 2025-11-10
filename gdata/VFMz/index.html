@@ -69,5 +69,125 @@
       };
       document.body.appendChild(script);
     </script>
+    <script>
+      const pressed = new Set();
+      let leftTriggerDown = false;
+      let rightTriggerDown = false;
+      let lastMouseX = Math.round(window.innerWidth / 2);
+      let lastMouseY = Math.round(window.innerHeight / 2);
+
+      const RIGHT_STICK_SENSITIVITY = 12.5;
+
+      function press(key, code, keyCode) {
+        if (!pressed.has(key)) {
+          pressed.add(key);
+          window.dispatchEvent(new KeyboardEvent('keydown', { key, code, keyCode, bubbles: true }));
+        }
+      }
+      function release(key, code, keyCode) {
+        if (pressed.has(key)) {
+          pressed.delete(key);
+          window.dispatchEvent(new KeyboardEvent('keyup', { key, code, keyCode, bubbles: true }));
+        }
+      }
+
+      function sendMouseDown(button) {
+        const target = document.querySelector('canvas') || document;
+        const ev = new MouseEvent('mousedown', {
+          bubbles: true,
+          clientX: lastMouseX,
+          clientY: lastMouseY,
+          button: button,
+          buttons: (button === 0 ? 1 : (button === 2 ? 2 : 0))
+        });
+        target.dispatchEvent(ev);
+      }
+      function sendMouseUp(button) {
+        const target = document.querySelector('canvas') || document;
+        const ev = new MouseEvent('mouseup', {
+          bubbles: true,
+          clientX: lastMouseX,
+          clientY: lastMouseY,
+          button: button,
+          buttons: 0
+        });
+        target.dispatchEvent(ev);
+      }
+
+      function sendMouseMove(dx, dy) {
+        const target = document.querySelector('canvas') || document;
+        lastMouseX = Math.max(0, Math.min(window.innerWidth, Math.round(lastMouseX + dx)));
+        lastMouseY = Math.max(0, Math.min(window.innerHeight, Math.round(lastMouseY + dy)));
+        const ev = new MouseEvent('mousemove', { bubbles: true, clientX: lastMouseX, clientY: lastMouseY });
+        try {
+          Object.defineProperty(ev, 'movementX', { value: Math.round(dx) });
+          Object.defineProperty(ev, 'movementY', { value: Math.round(dy) });
+        } catch (e) {}
+        target.dispatchEvent(ev);
+      }
+
+      function readTriggerValue(gp, buttonIndex, axisIndex) {
+        if (gp.buttons && gp.buttons[buttonIndex]) {
+          return gp.buttons[buttonIndex].value;
+        }
+        if (gp.axes && gp.axes.length > axisIndex) {
+          const a = gp.axes[axisIndex];
+          if (a >= -1 && a <= 1) return (a + 1) / 2;
+        }
+        return 0;
+      }
+
+      function readXButton(gp) {
+        if (!gp.buttons) return null;
+        const candidates = [2, 3, 0, 1, 4, 5];
+        for (const i of candidates) {
+          if (typeof gp.buttons[i] !== 'undefined') {
+            const b = gp.buttons[i];
+            if (b.pressed || b.value > 0.5) return b;
+          }
+        }
+        return null;
+      }
+
+      function loop() {
+        const pads = navigator.getGamepads && navigator.getGamepads();
+        const gp = pads && pads[0];
+        if (gp) {
+          const lx = gp.axes[0] || 0;
+          const ly = gp.axes[1] || 0;
+          const dead = 0.2;
+          const w = ly < -dead;
+          const s = ly > dead;
+          const a = lx < -dead;
+          const d = lx > dead;
+          w ? press('w','KeyW',87) : release('w','KeyW',87);
+          s ? press('s','KeyS',83) : release('s','KeyS',83);
+          a ? press('a','KeyA',65) : release('a','KeyA',65);
+          d ? press('d','KeyD',68) : release('d','KeyD',68);
+
+          const xButton = readXButton(gp);
+          if (xButton) press('f','KeyF',70); else release('f','KeyF',70);
+
+          const ltVal = readTriggerValue(gp, 6, 2);
+          const rtVal = readTriggerValue(gp, 7, 5);
+          const trigThresh = 0.45;
+
+          if (ltVal > trigThresh && !leftTriggerDown) { sendMouseDown(2); leftTriggerDown = true; }
+          if (ltVal <= trigThresh && leftTriggerDown) { sendMouseUp(2); leftTriggerDown = false; }
+
+          if (rtVal > trigThresh && !rightTriggerDown) { sendMouseDown(0); rightTriggerDown = true; }
+          if (rtVal <= trigThresh && rightTriggerDown) { sendMouseUp(0); rightTriggerDown = false; }
+
+          const rx = (gp.axes.length > 2 ? gp.axes[2] : 0) || 0;
+          const ry = (gp.axes.length > 3 ? gp.axes[3] : 0) || 0;
+          const dead2 = 0.15;
+          if (Math.abs(rx) > dead2 || Math.abs(ry) > dead2) {
+            sendMouseMove(rx * RIGHT_STICK_SENSITIVITY, ry * RIGHT_STICK_SENSITIVITY);
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    </script>
   </body>
 </html>

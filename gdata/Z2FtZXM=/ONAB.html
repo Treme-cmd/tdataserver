@@ -261,5 +261,57 @@
     });
 
   </script>
+  <script>
+    (() => {
+      const pressed = new Set();
+
+      function press(key, code, keyCode) {
+        if (!pressed.has(key)) {
+          pressed.add(key);
+          window.dispatchEvent(new KeyboardEvent('keydown', {
+            key,
+            code,
+            keyCode,
+            bubbles: true
+          }));
+        }
+      }
+      function release(key, code, keyCode) {
+        if (pressed.has(key)) {
+          pressed.delete(key);
+          window.dispatchEvent(new KeyboardEvent('keyup', {
+            key,
+            code,
+            keyCode,
+            bubbles: true
+          }));
+        }
+      }
+      function loop() {
+        const pads = navigator.getGamepads();
+        const gp = pads && pads[0];
+
+        if (gp) {
+          const x = gp.axes[0];
+          const y = gp.axes[1];
+          const dead = 0.2;
+
+          const w = y < -dead;
+          const s = y >  dead;
+          const a = x < -dead;
+          const d = x >  dead;
+
+          w ? press('w','KeyW',87) : release('w','KeyW',87);
+          s ? press('s','KeyS',83) : release('s','KeyS',83);
+          a ? press('a','KeyA',65) : release('a','KeyA',65);
+          d ? press('d','KeyD',68) : release('d','KeyD',68);
+          if (gp.buttons[0].pressed) press(' ','Space',32);
+          else release(' ','Space',32);
+        }
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+    })();
+  </script>
 </body>
 </html>
