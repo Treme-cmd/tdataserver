@@ -2,6 +2,66 @@
 
 <html lang="en-us">
 <head>
+  <script>
+    (function(){
+      try {
+        const desktopUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+
+        Object.defineProperty(navigator, 'userAgent', { get: () => desktopUA, configurable: true });
+        Object.defineProperty(navigator, 'platform', { get: () => 'Win32', configurable: true });
+        try {
+          if (!navigator.userAgentData) {
+            Object.defineProperty(navigator, 'userAgentData', {
+              get: () => ({
+                platform: 'Windows',
+                mobile: false,
+                brands: [{ brand: 'Chromium', version: '120' }],
+                getHighEntropyValues: async () => ({ platform: 'Windows', mobile: false })
+              }),
+              configurable: true
+            });
+          } else {
+            try { navigator.userAgentData.platform = 'Windows'; } catch(e) {}
+            try { navigator.userAgentData.mobile = false; } catch(e) {}
+          }
+        } catch(e){}
+
+        Object.defineProperty(navigator, 'maxTouchPoints', { get: () => 0, configurable: true });
+        window.ontouchstart = undefined;
+        window.ontouchmove = undefined;
+        window.ontouchend = undefined;
+
+        const realMatchMedia = window.matchMedia;
+        window.matchMedia = function(query){
+          if (typeof query === 'string' && /(pointer|hover|any-pointer|any-hover)/i.test(query)) {
+            return {
+              matches: false,
+              media: query,
+              onchange: null,
+              addListener: ()=>{},
+              removeListener: ()=>{},
+              addEventListener: ()=>{},
+              removeEventListener: ()=>{},
+              dispatchEvent: ()=>false
+            };
+          }
+          return realMatchMedia.call(window, query);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const container = document.querySelector('#unity-container');
+          if (container) {
+            container.classList.remove('unity-mobile');
+            container.classList.add('unity-desktop');
+          }
+          document.documentElement.classList.remove('mobile');
+          document.body.classList.remove('mobile');
+        });
+      } catch (err) {
+        console.warn('didnt work:', err);
+      }
+    })();
+</script>
 <meta charset="utf-8"/>
 <link rel="icon" type="image/x-icon" href="logo.png">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -173,7 +233,7 @@
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
         if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            return "true";
+            return "false";
         }
 
         return "false";
