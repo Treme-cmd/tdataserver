@@ -17,7 +17,7 @@
       color: #ffffff;
     }
     body::-webkit-scrollbar {
-      display: none; 
+      display: none;
     }
     body::before {
       content: '';
@@ -163,6 +163,26 @@
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     }
+    .press-btn {
+      display: inline-block;
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+    .press-btn:hover {
+      background: #c82333;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -193,7 +213,7 @@
       <a class="game-card" onclick="openIframe('sm64.html')">
         <img src="https://raw.githubusercontent.com/Treme-cmd/TUGH/refs/heads/main/public/Assets/SM64.png" title="Super Mario 64">
         <h3>Super Mario 64</h3>
-      </a>      
+      </a>
       <a class="game-card hidden" data-hidden="tetris" onclick="openIframe('newtetris.html')">
         <img src="https://logosandtypes.com/wp-content/uploads/2024/08/Tetris.png" title="Tetris">
         <h3>Tetris</h3>
@@ -276,6 +296,7 @@
       </a>
     </div>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScu5uDbmVIdQjMlanXU5sBBzW8c3-1BVcOmFNt7H6fHE03UGg/viewform?usp=publish-editor" target="_blank" class="request-btn">Request "Lesson"</a>
+    <button class="press-btn" onclick="alert('As of recent, Neocities has DELETED my account. I do not know the reason, nor did they inform me of account deletion. I do not know how much longer this site will stay up. Follow me at treme-cmd.bsky.social for updates. Thank you.')">PRESS ME</button>
   </div>
 
   <div id="iframe-container">
@@ -287,7 +308,7 @@
     document.addEventListener('contextmenu', function (e) {
       e.preventDefault();
     });
-    
+
     function openIframe(url) {
       document.getElementById('game-iframe').src = url;
       document.getElementById('iframe-container').style.display = 'flex';
@@ -303,13 +324,13 @@
       const gameCards = document.querySelectorAll('.game-card');
       gameCards.forEach(card => {
       const title = card.querySelector('h3').innerText.toLowerCase();
-      const hiddenCondition = card.dataset.hidden; 
+      const hiddenCondition = card.dataset.hidden;
       if (hiddenCondition && searchBar === hiddenCondition) {
-        card.classList.remove('hidden'); 
+        card.classList.remove('hidden');
       } else if (!hiddenCondition && title.includes(searchBar)) {
-        card.classList.remove('hidden'); 
+        card.classList.remove('hidden');
       } else {
-        card.classList.add('hidden'); 
+        card.classList.add('hidden');
       }
     });
   }
