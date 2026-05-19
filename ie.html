@@ -4,76 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Idle-Editor</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      align-items: flex-start;
-      padding: 20px;
-      background: linear-gradient(135deg, #282c34, #3a3f47);
-      color: #61dafb;
-      margin: 0;
-    }
-    .container {
-      width: 100%;
-      max-width: 600px;
-      background: #20232a;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-    h1 {
-      color: #61dafb;
-      text-align: center;
-      margin-bottom: 5px;
-    }
-    .description {
-      text-align: center;
-      font-size: 0.9em;
-      color: #bbbbbb;
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: bold;
-      margin-top: 10px;
-      display: block;
-    }
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 4px;
-      border: 1px solid #61dafb;
-      background: #282c34;
-      color: #ffffff;
-      resize: none;
-    }
-    button {
-      cursor: pointer;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    .output-label {
-      margin-top: 15px;
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-    .output-container {
-      margin-top: 10px;
-      padding: 10px;
-      background: #1c1e24;
-      border-radius: 4px;
-      word-wrap: break-word;
-    }
-    #editor {
-      display: none;
-    }
-  </style>
+  <style>body { visibility: hidden; }</style>
+  <link id="theme-stylesheet" rel="stylesheet" href="/style.css" onload="document.body.style.visibility='visible'">
+  <script src="/settings.js"></script>
 </head>
 <body>
   <div class="container">

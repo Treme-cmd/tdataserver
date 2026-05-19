@@ -1,0 +1,352 @@
+* {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #282c34, #3a3f47);
+      color: #61dafb;
+    }
+
+    .lesson body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #1e1e2f, #282c34);
+      overflow: auto;
+      color: #ffffff;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/stardust.png');
+      animation: starsMove 20s linear infinite;
+      opacity: 0.3;
+      z-index: -2;
+    }
+
+    @keyframes starsMove {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: -1000px -1000px;
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      padding: 25px;
+      background: #20232a;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .containerlesson {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(32, 35, 42, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      z-index: 1;
+    }
+
+    #searchBar {
+      width: 90%;
+      max-width: 600px;
+      padding: 15px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    #searchBar:focus {
+      border-color: #61dafb;
+      box-shadow: 0 2px 8px rgba(97, 218, 251, 0.5);
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    .main-img {
+      width: 100%;
+      max-width: 150px;
+      border-radius: 50px;
+      margin-bottom: 15px;
+      border: 4px solid #61dafb;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin: 10px 0;
+      color: #61dafb;
+    }
+
+    .lesson h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #61dafb;
+      text-shadow: 0 0 8px rgba(97, 218, 251, 0.7);
+    }
+
+    p {
+      color: #bbbbbb;
+      font-size: 1em;
+      line-height: 1.6;
+      margin: 10px 0 20px;
+    }
+
+    .button {
+      display: block;
+      padding: 12px 24px;
+      font-size: 1em;
+      font-weight: 700;
+      color: #ffffff;
+      background-color: #61dafb;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      margin: 10px auto;
+      width: fit-content;
+      }
+      
+    .button:hover {
+      background-color: #4ea6d5;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .description {
+      text-align: center;
+      font-size: 0.9em;
+      color: #bbbbbb;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input, textarea, .ie button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #61dafb;
+      background: #282c34;
+      color: #ffffff;
+      resize: none;
+    }
+
+    .ie button {
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .output-label {
+      margin-top: 15px;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .output-container {
+      margin-top: 10px;
+      padding: 10px;
+      background: #1c1e24;
+      border-radius: 4px;
+      word-wrap: break-word;
+    }
+
+    #editor {
+      display: none;
+    }
+
+    .games-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .game-card {
+      background: #20232a;
+      border-radius: 10px;
+      padding: 10px;
+      width: 150px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .game-card:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #61dafb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .game-card img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
+    }
+
+    .game-card h3 {
+      font-size: 1.1em;
+      color: #ffffff;
+      margin: 5px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #iframe-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    #iframe-container iframe {
+      width: 90vw;
+      height: 90vh;
+      border: none;
+      border-radius: 12px;
+    }
+
+    #back-btn {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: #61dafb;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    #back-btn:hover {
+      background: #4fa3f7;
+      transform: scale(1.05);
+    }
+
+    .request-btn {
+      display: inline-block;
+      background: #61dafb;
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 30px;
+    }
+
+    .request-btn:hover {
+      background: #4fa3f7;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .press-btn {
+      display: inline-block;
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-top: 15px;
+      margin-left: 10px;
+    }
+
+    .press-btn:hover {
+      background: #c82333;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .blanker {
+      display: block;
+      width: fit-content;
+      margin: 0.5rem auto;
+      background: linear-gradient(145deg, #61dafb, #3385b5);
+      border: none;
+      border-radius: 40px;
+      padding: 12px 28px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #1e2026;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .blanker:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(145deg, #72e3ff, #419bcb);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+      color: #0a0c12;
+    }
+
+    .blanker:active {
+      transform: translateY(2px);
+    }
